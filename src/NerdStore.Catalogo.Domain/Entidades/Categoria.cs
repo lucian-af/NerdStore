@@ -1,4 +1,5 @@
-﻿using NerdStore.Catalogo.Domain.Validations;
+﻿using System.Collections.Generic;
+using NerdStore.Catalogo.Domain.Validations;
 using NerdStore.Core.DomainObjects;
 using NerdStore.Core.Exceptions;
 
@@ -6,9 +7,6 @@ namespace NerdStore.Catalogo.Domain.Entidades
 {
 	public class Categoria : Entidade
 	{
-		public string Nome { get; private set; }
-		public int Codigo { get; private set; }
-
 		public Categoria(string nome, int codigo)
 		{
 			Nome = nome;
@@ -16,6 +14,11 @@ namespace NerdStore.Catalogo.Domain.Entidades
 
 			Validar();
 		}
+
+		public string Nome { get; private set; }
+		public int Codigo { get; private set; }
+
+		public virtual ICollection<Produto> Produtos { get; set; }
 
 		public override string ToString()
 			=> $"{Codigo} - {Nome}";
