@@ -13,6 +13,8 @@ namespace NerdStore.Catalogo.Domain.Entidades
 		{
 			Nome = nome;
 			Codigo = codigo;
+
+			Validar();
 		}
 
 		public override string ToString()

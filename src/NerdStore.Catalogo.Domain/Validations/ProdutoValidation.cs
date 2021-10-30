@@ -10,19 +10,23 @@ namespace NerdStore.Catalogo.Domain.Validations
 		{
 			RuleFor(p => p.Nome)
 				.NotEmpty()
-				.WithMessage("O Nome do produto é obrigatório.");
+				.WithMessage("O atributo 'Nome' do produto é obrigatório.");
 
 			RuleFor(p => p.Descricao)
 				.NotEmpty()
-				.WithMessage("A Descrição do produto é obrigatório.");
+				.WithMessage("O atributo 'Descricao' do produto é obrigatório.");
 
 			RuleFor(p => p.IdCategoria)
 				.NotEqual(Guid.Empty)
-				.WithMessage("O Id da Categoria do produto é obrigatório.");
+				.WithMessage("O atributo 'IdCategoria' do produto é obrigatório.");
 
 			RuleFor(p => p.Valor)
 				.GreaterThanOrEqualTo(0.01m)
 				.WithMessage("O valor do produto deve ser maior que zero.");
+
+			RuleFor(p => p.Imagem)
+				.NotEmpty()
+				.WithMessage("O atributo 'Imagem' do produto é obrigatório.");
 		}
 	}
 }

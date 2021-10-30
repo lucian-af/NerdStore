@@ -9,11 +9,11 @@ namespace NerdStore.Catalogo.Domain.Validations
 		{
 			RuleFor(ca => ca.Nome)
 				.NotEmpty()
-				.WithMessage("O Nome da categoria é obrigatório.");
+				.WithMessage("O atributo 'Nome' da categoria é obrigatório.");
 
 			RuleFor(ca => ca.Codigo)
-				.NotEmpty()
-				.WithMessage("O Código da categoria é obrigatório.");
+				.GreaterThan(0)
+				.WithMessage("O atributo 'Codigo' da categoria deve ser um número maior que zero.");
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using NerdStore.Catalogo.Domain.Validations;
+using NerdStore.Catalogo.Domain.ValueObjects;
 using NerdStore.Core.DomainObjects;
 using NerdStore.Core.Exceptions;
 using NerdStore.Core.Interfaces;
@@ -17,6 +18,7 @@ namespace NerdStore.Catalogo.Domain.Entidades
 		public string Imagem { get; private set; }
 		public int QuantidadeEstoque { get; private set; }
 		public Categoria Categoria { get; private set; }
+		public Dimensoes Dimensoes { get; private set; }
 
 		public Produto(
 			string nome,
@@ -25,7 +27,8 @@ namespace NerdStore.Catalogo.Domain.Entidades
 			decimal valor,
 			Guid idCategoria,
 			DateTime dataCadastro,
-			string imagem)
+			string imagem,
+			Dimensoes dimensoes)
 		{
 			Nome = nome;
 			Descricao = descricao;
@@ -34,6 +37,7 @@ namespace NerdStore.Catalogo.Domain.Entidades
 			IdCategoria = idCategoria;
 			DataCadastro = dataCadastro;
 			Imagem = imagem;
+			Dimensoes = dimensoes;
 
 			Validar();
 		}
