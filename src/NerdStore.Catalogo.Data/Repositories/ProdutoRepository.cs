@@ -16,10 +16,10 @@ namespace NerdStore.Catalogo.Data.Repositories
 			=> _dbSetCategoria = context.Set<Categoria>();
 
 		public async Task<ICollection<Produto>> ObterPorCategoria(int codigo)
-			=> await _dbSet.Include(c => c.Categoria).Where(c => c.Categoria.Codigo == codigo).ToListAsync();
+			=> await _dbSet.Include(c => c.Categoria).Where(c => c.Categoria.Codigo == codigo).AsNoTracking().ToListAsync();
 
 		public async Task<ICollection<Categoria>> ObterCategorias()
-			=> await _dbSetCategoria.ToListAsync();
+			=> await _dbSetCategoria.AsNoTracking().ToListAsync();
 
 		public async Task AdicionarCategoria(Categoria categoria)
 			=> await _dbSetCategoria.AddAsync(categoria);

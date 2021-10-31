@@ -7,6 +7,7 @@ namespace NerdStore.Catalogo.Domain.Entidades
 {
 	public class Categoria : Entidade
 	{
+		protected Categoria() { }
 		public Categoria(string nome, int codigo)
 		{
 			Nome = nome;

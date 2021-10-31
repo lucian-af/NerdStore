@@ -9,6 +9,8 @@ namespace NerdStore.Catalogo.Domain.Entidades
 {
 	public class Produto : Entidade, IAggregateRoot
 	{
+		protected Produto() { }
+
 		public Guid IdCategoria { get; private set; }
 		public string Nome { get; private set; }
 		public string Descricao { get; private set; }

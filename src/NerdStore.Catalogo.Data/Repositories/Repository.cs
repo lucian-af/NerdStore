@@ -28,10 +28,10 @@ namespace NerdStore.Catalogo.Data.Repositories
 			=> _dbSet.Update(obj);
 
 		public virtual async Task<T> ObterPorId(Guid id)
-			=> await _dbSet.FindAsync(id);
+			=> await _dbSet.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
 
 		public virtual async Task<ICollection<T>> ObterTodos()
-			=> await _dbSet.ToListAsync();
+			=> await _dbSet.AsNoTracking().ToListAsync();
 
 		public virtual void Remover(T obj)
 			=> _dbSet.Remove(obj);
