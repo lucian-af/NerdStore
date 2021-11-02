@@ -49,6 +49,7 @@ namespace NerdStore.Core.DomainObjects
 		public override string ToString()
 			=> $"{GetType().Name} [Id={Id}]";
 
-		public abstract void Validar();
+		public virtual void Validar()
+			=> throw new NotImplementedException();
 	}
 }
