@@ -10,19 +10,19 @@ namespace NerdStore.Vendas.Domain.Validations
 		{
 			RuleFor(v => v.DataValidade)
 				.Must(data => data > DateTime.Now)
-				.WithMessage("Voucher expirado");
+				.WithMessage("Voucher expirado.");
 
 			RuleFor(v => v.Ativo)
 				.Equal(true)
-				.WithMessage("Voucher inválido");
+				.WithMessage("Voucher inválido.");
 
 			RuleFor(v => v.Utilizado)
 				.Equal(false)
-				.WithMessage("Voucher utilizado");
+				.WithMessage("Voucher utilizado.");
 
 			RuleFor(v => v.Quantidade)
 				.GreaterThan(0)
-				.WithMessage("Voucher indisponível");
+				.WithMessage("Voucher indisponível.");
 		}
 	}
 }
