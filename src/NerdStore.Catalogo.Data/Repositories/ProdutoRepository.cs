@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using NerdStore.Catalogo.Data.Context;
 using NerdStore.Catalogo.Domain.Entidades;
 using NerdStore.Catalogo.Domain.Interfaces;
+using NerdStore.Core.Data;
 
 namespace NerdStore.Catalogo.Data.Repositories
 {
-	public class ProdutoRepository : Repository<Produto>, IProdutoRepository
+	public class ProdutoRepository : Repository<Produto, CatalogoContext>, IProdutoRepository
 	{
 		private readonly DbSet<Categoria> _dbSetCategoria;
 

@@ -20,6 +20,6 @@ namespace NerdStore.Catalogo.Domain.Events
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
 		public async Task Handle(ProdutoAbaixoEstoqueEvent notification, CancellationToken cancellationToken)
-			=> await _repoProduto.ObterPorId(notification.IdAggregate);
+			=> await _repoProduto.ObterPorIdAsync(notification.IdAggregate);
 	}
 }

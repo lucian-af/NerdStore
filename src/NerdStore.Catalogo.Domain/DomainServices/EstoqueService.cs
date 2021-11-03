@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using NerdStore.Catalogo.Domain.Events;
 using NerdStore.Catalogo.Domain.Interfaces;
-using NerdStore.Core.Interfaces;
+using NerdStore.Core.Communication.Interfaces;
 using NerdStore.Core.Settings;
 
 namespace NerdStore.Catalogo.Domain.DomainServices
@@ -10,11 +10,11 @@ namespace NerdStore.Catalogo.Domain.DomainServices
 	public class EstoqueService : IEstoqueService
 	{
 		private readonly IProdutoRepository _repoProduto;
-		private readonly IMediatrHandler _mediatrHandler;
+		private readonly IMediatorHandler _mediatrHandler;
 
 		public EstoqueService(
 			IProdutoRepository repoProduto,
-			IMediatrHandler mediatrHandler)
+			IMediatorHandler mediatrHandler)
 		{
 			_repoProduto = repoProduto;
 			_mediatrHandler = mediatrHandler;
@@ -22,7 +22,7 @@ namespace NerdStore.Catalogo.Domain.DomainServices
 
 		public async Task<bool> DebitarEstoque(Guid idProduto, int quantidade)
 		{
-			var produto = await _repoProduto.ObterPorId(idProduto);
+			var produto = await _repoProduto.ObterPorIdAsync(idProduto);
 
 			if (produto == null) return false;
 
@@ -41,7 +41,7 @@ namespace NerdStore.Catalogo.Domain.DomainServices
 
 		public async Task<bool> ReporEstoque(Guid idProduto, int quantidade)
 		{
-			var produto = await _repoProduto.ObterPorId(idProduto);
+			var produto = await _repoProduto.ObterPorIdAsync(idProduto);
 
 			if (produto is null)
 				return false;

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NerdStore.Core.Data.Interfaces;
+using NerdStore.Core.Messages;
 
 namespace NerdStore.Catalogo.Data.Context
 {
@@ -20,6 +21,8 @@ namespace NerdStore.Catalogo.Data.Context
 				.SelectMany(e => e.GetProperties().Where(p => p.ClrType == typeof(string)))
 				.ToList()
 				.ForEach(prop => prop.SetColumnType("varchar(100)"));
+
+			modelBuilder.Ignore<Event>();
 
 			// Busca os mapeamentos criados via reflection uma única vez para criação no banco
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogoContext).Assembly);

@@ -29,10 +29,10 @@ namespace NerdStore.Catalogo.Application.Services
 			=> _mapper.Map<IEnumerable<ProdutoDto>>(await _produtoRepository.ObterPorCategoria(codigo));
 
 		public async Task<ProdutoDto> ObterPorId(Guid id)
-			=> _mapper.Map<ProdutoDto>(await _produtoRepository.ObterPorId(id));
+			=> _mapper.Map<ProdutoDto>(await _produtoRepository.ObterPorIdAsync(id));
 
 		public async Task<IEnumerable<ProdutoDto>> ObterTodos()
-			=> _mapper.Map<IEnumerable<ProdutoDto>>(await _produtoRepository.ObterTodos());
+			=> _mapper.Map<IEnumerable<ProdutoDto>>(await _produtoRepository.ObterTodosAsync());
 
 		public async Task<IEnumerable<CategoriaDto>> ObterCategorias()
 			=> _mapper.Map<IEnumerable<CategoriaDto>>(await _produtoRepository.ObterCategorias());
@@ -40,7 +40,7 @@ namespace NerdStore.Catalogo.Application.Services
 		public async Task AdicionarProduto(ProdutoDto produtoDto)
 		{
 			var produto = _mapper.Map<Produto>(produtoDto);
-			await _produtoRepository.Adicionar(produto);
+			await _produtoRepository.AdicionarAsync(produto);
 
 			await _produtoRepository.UnitOfWork.Commit();
 		}
@@ -58,7 +58,7 @@ namespace NerdStore.Catalogo.Application.Services
 			if (!await _estoqueService.DebitarEstoque(id, quantidade))
 				throw new DomainException("Falha ao debitar estoque");
 
-			return _mapper.Map<ProdutoDto>(await _produtoRepository.ObterPorId(id));
+			return _mapper.Map<ProdutoDto>(await _produtoRepository.ObterPorIdAsync(id));
 		}
 
 		public async Task<ProdutoDto> ReporEstoque(Guid id, int quantidade)
@@ -66,7 +66,7 @@ namespace NerdStore.Catalogo.Application.Services
 			if (!await _estoqueService.ReporEstoque(id, quantidade))
 				throw new DomainException("Falha ao repor estoque");
 
-			return _mapper.Map<ProdutoDto>(await _produtoRepository.ObterPorId(id));
+			return _mapper.Map<ProdutoDto>(await _produtoRepository.ObterPorIdAsync(id));
 		}
 
 		public void Dispose()
