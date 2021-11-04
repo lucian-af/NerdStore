@@ -12,6 +12,10 @@ using NerdStore.Core.Communication.Mediator;
 using NerdStore.Core.Messages.Common.Notifications;
 using NerdStore.Vendas.Application.Commands.Handlers;
 using NerdStore.Vendas.Application.Commands.Models;
+using NerdStore.Vendas.Application.Events.Handlers;
+using NerdStore.Vendas.Application.Events.Models;
+using NerdStore.Vendas.Application.Queries;
+using NerdStore.Vendas.Application.Queries.Dtos.Interfaces;
 using NerdStore.Vendas.Data.Context;
 using NerdStore.Vendas.Data.Repository;
 using NerdStore.Vendas.Domain.Entidades;
@@ -39,7 +43,20 @@ namespace NerdStore.WebApp.Mvc.Setup
 			// Vendas
 			services.AddScoped<VendasContext>();
 			services.AddScoped<IPedidoRepository, PedidoRepository>();
+			services.AddScoped<IPedidoQueries, PedidoQueries>();
+
 			services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
+			services.AddScoped<IRequestHandler<AtualizarItemPedidoCommand, bool>, AtualizarItemPedidoCommandHandler>();
+			services.AddScoped<IRequestHandler<RemoverItemPedidoCommand, bool>, RemoverItemPedidoCommandHandler>();
+			services.AddScoped<IRequestHandler<AplicarVoucherPedidoCommand, bool>, AplicarVoucherPedidoCommandHandler>();
+			services.AddScoped<IRequestHandler<IniciarPedidoCommand, bool>, IniciarPedidoCommandHandler>();
+			services.AddScoped<IRequestHandler<FinalizarPedidoCommand, bool>, FinalizarPedidoCommandHandler>();
+			services.AddScoped<IRequestHandler<CancelarProcessamentoPedidoCommand, bool>, CancelarProcessamentoPedidoCommandHandler>();
+
+			services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoEventHandler>();
+			services.AddScoped<INotificationHandler<PedidoAtualizadoEvent>, PedidoEventHandler>();
+			services.AddScoped<INotificationHandler<PedidoItemAdicionadoEvent>, PedidoEventHandler>();
+
 		}
 	}
 }

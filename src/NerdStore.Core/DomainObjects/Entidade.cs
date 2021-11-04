@@ -6,13 +6,13 @@ namespace NerdStore.Core.DomainObjects
 {
 	public abstract class Entidade
 	{
-		public Guid Id { get; protected set; }
-		private List<Event> _notificacoes;
-		public IReadOnlyCollection<Event> Notificacoes => _notificacoes?.AsReadOnly();
-
-
 		protected Entidade()
 			=> Id = Guid.NewGuid();
+		public Guid Id { get; protected set; }
+
+		private List<Event> _notificacoes;
+
+		public IReadOnlyCollection<Event> Notificacoes => _notificacoes?.AsReadOnly();
 
 		public override bool Equals(object obj)
 		{

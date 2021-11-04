@@ -4,24 +4,20 @@ using System.Threading.Tasks;
 using MediatR;
 using NerdStore.Core.Communication.Interfaces;
 using NerdStore.Core.Messages;
-using NerdStore.Core.Messages.Common.Notifications;
 using NerdStore.Vendas.Application.Commands.Models;
+using NerdStore.Vendas.Application.Events.Models;
 using NerdStore.Vendas.Domain.Entidades;
 
 namespace NerdStore.Vendas.Application.Commands.Handlers
 {
-	public class PedidoCommandHandler : IRequestHandler<AdicionarItemPedidoCommand, bool>
+	public class PedidoCommandHandler : CommandHandler, IRequestHandler<AdicionarItemPedidoCommand, bool>
 	{
 		private readonly IPedidoRepository _repoPedido;
-		private readonly IMediatorHandler _mediatorHandler;
 
 		public PedidoCommandHandler(
 			IPedidoRepository repoPedido,
-			IMediatorHandler mediatorHandler)
-		{
-			_repoPedido = repoPedido;
-			_mediatorHandler = mediatorHandler;
-		}
+			IMediatorHandler mediatorHandler) : base(mediatorHandler)
+			=> _repoPedido = repoPedido;
 
 		public async Task<bool> Handle(AdicionarItemPedidoCommand message, CancellationToken cancellationToken)
 		{
@@ -33,40 +29,44 @@ namespace NerdStore.Vendas.Application.Commands.Handlers
 
 			if (pedido is null)
 			{
-				pedido = Pedido.PedidoFactory.NovoPedidoRascunho(message.IdCliente);
-				pedido.AdicionarItem(pedidoItem);
-
-				await _repoPedido.AdicionarAsync(pedido);
+				pedido = await NovoPedidoRascunho(message, pedidoItem);
 			}
 			else
 			{
-				pedido.AdicionarItem(pedidoItem);
-
-				if (pedido.PedidoItemExistente(pedidoItem))
-					_repoPedido.AtualizarItem(pedido.PedidoItems.FirstOrDefault(p => p.IdProduto == pedidoItem.IdProduto));
-				else
-					_repoPedido.AdicionarItem(pedidoItem);
+				AdicionarAtualizarPedidoItem(pedido, pedidoItem);
 			}
+
+			pedido.AdicionarEvento(
+				new PedidoItemAdicionadoEvent(
+					pedido.IdCliente,
+					pedido.Id,
+					message.IdProduto,
+					message.ValorUnitario,
+					message.Quantidade));
 
 			return await _repoPedido.UnitOfWork.Commit();
 		}
 
-
-		/// <summary>
-		/// Validar command com disparo de eventos
-		/// </summary>
-		/// <param name="message"></param>
-		/// <returns></returns>
-		private bool ValidarComando(Command message)
+		private void AdicionarAtualizarPedidoItem(Pedido pedido, PedidoItem pedidoItem)
 		{
-			if (message.Valido())
-				return true;
+			pedido.AdicionarItem(pedidoItem);
 
-			message.ValidationResult.Errors
-				.ForEach(erro => _mediatorHandler
-				.PublicarNotificacao(new DomainNotification(message.MessageType, erro.ErrorMessage)));
+			if (pedido.PedidoItemExistente(pedidoItem))
+				_repoPedido.AtualizarItem(pedido.PedidoItems.FirstOrDefault(p => p.IdProduto == pedidoItem.IdProduto));
+			else
+				_repoPedido.AdicionarItem(pedidoItem);
 
-			return false;
+			pedido.AdicionarEvento(new PedidoAtualizadoEvent(pedido.IdCliente, pedido.Id, pedido.ValorTotal));
+		}
+
+		private async Task<Pedido> NovoPedidoRascunho(AdicionarItemPedidoCommand message, PedidoItem pedidoItem)
+		{
+			var pedido = Pedido.PedidoFactory.NovoPedidoRascunho(message.IdCliente);
+			pedido.AdicionarItem(pedidoItem);
+
+			await _repoPedido.AdicionarAsync(pedido);
+			pedido.AdicionarEvento(new PedidoRascunhoIniciadoEvent(message.IdCliente, pedido.Id));
+			return pedido;
 		}
 	}
 }
