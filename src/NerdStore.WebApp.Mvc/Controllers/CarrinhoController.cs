@@ -36,7 +36,8 @@ namespace NerdStore.WebApp.MVC.Controllers
 		public async Task<IActionResult> AdicionarItem(Guid id, int quantidade)
 		{
 			var produto = await _produtoAppService.ObterPorId(id);
-			if (produto == null) return BadRequest();
+			if (produto == null)
+				return BadRequest();
 
 			if (produto.QuantidadeEstoque < quantidade)
 			{

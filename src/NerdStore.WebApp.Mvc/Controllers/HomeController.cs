@@ -1,16 +1,12 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using NerdStore.WebApp.Mvc.Models;
 
 namespace NerdStore.WebApp.Mvc.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
-
-		public HomeController(ILogger<HomeController> logger)
-			=> _logger = logger;
+		public HomeController() { }
 
 		public IActionResult Index()
 			=> View();

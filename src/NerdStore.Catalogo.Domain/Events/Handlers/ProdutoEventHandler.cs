@@ -1,9 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using NerdStore.Catalogo.Domain.Events.Models;
 using NerdStore.Catalogo.Domain.Interfaces;
 
-namespace NerdStore.Catalogo.Domain.Events
+namespace NerdStore.Catalogo.Domain.Events.Handlers
 {
 	public class ProdutoEventHandler : INotificationHandler<ProdutoAbaixoEstoqueEvent>
 	{

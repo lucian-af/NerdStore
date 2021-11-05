@@ -10,11 +10,11 @@ using NerdStore.Vendas.Domain.Entidades;
 
 namespace NerdStore.Vendas.Application.Commands.Handlers
 {
-	public class PedidoCommandHandler : CommandHandler, IRequestHandler<AdicionarItemPedidoCommand, bool>
+	public class AdicionarItemPedidoCommandHandler : CommandHandler, IRequestHandler<AdicionarItemPedidoCommand, bool>
 	{
 		private readonly IPedidoRepository _repoPedido;
 
-		public PedidoCommandHandler(
+		public AdicionarItemPedidoCommandHandler(
 			IPedidoRepository repoPedido,
 			IMediatorHandler mediatorHandler) : base(mediatorHandler)
 			=> _repoPedido = repoPedido;
@@ -49,9 +49,10 @@ namespace NerdStore.Vendas.Application.Commands.Handlers
 
 		private void AdicionarAtualizarPedidoItem(Pedido pedido, PedidoItem pedidoItem)
 		{
+			var pedidoItemExiste = pedido.PedidoItemExistente(pedidoItem);
 			pedido.AdicionarItem(pedidoItem);
 
-			if (pedido.PedidoItemExistente(pedidoItem))
+			if (pedidoItemExiste)
 				_repoPedido.AtualizarItem(pedido.PedidoItems.FirstOrDefault(p => p.IdProduto == pedidoItem.IdProduto));
 			else
 				_repoPedido.AdicionarItem(pedidoItem);
