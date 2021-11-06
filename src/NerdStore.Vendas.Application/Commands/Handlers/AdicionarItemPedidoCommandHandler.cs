@@ -56,8 +56,6 @@ namespace NerdStore.Vendas.Application.Commands.Handlers
 				_repoPedido.AtualizarItem(pedido.PedidoItems.FirstOrDefault(p => p.IdProduto == pedidoItem.IdProduto));
 			else
 				_repoPedido.AdicionarItem(pedidoItem);
-
-			pedido.AdicionarEvento(new PedidoAtualizadoEvent(pedido.IdCliente, pedido.Id, pedido.ValorTotal));
 		}
 
 		private async Task<Pedido> NovoPedidoRascunho(AdicionarItemPedidoCommand message, PedidoItem pedidoItem)

@@ -42,8 +42,6 @@ namespace NerdStore.Vendas.Application.Commands.Handlers
 
 			pedido.AtualizarUnidades(pedidoItem, message.Quantidade);
 
-			pedido.AdicionarEvento(new PedidoAtualizadoEvent(pedido.IdCliente, pedido.Id, pedido.ValorTotal));
-
 			pedido.AdicionarEvento(
 				new PedidoProdutoAtualizadoEvent(
 					message.IdCliente,

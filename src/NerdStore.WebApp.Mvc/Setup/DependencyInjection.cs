@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using EventSourcing.Interfaces;
+using EventSourcing.Services;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using NerdStore.Catalogo.Application.Services;
 using NerdStore.Catalogo.Application.Services.Interfaces;
@@ -42,6 +44,9 @@ namespace NerdStore.WebApp.Mvc.Setup
 			// Notifications
 			services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
 
+			// Event Sourcing
+			services.AddSingleton<IEventStoreService, EventStoreService>();
+
 			// Catalogo
 			services.AddScoped<CatalogoContext>();
 			services.AddScoped<IProdutoRepository, ProdutoRepository>();
@@ -67,7 +72,6 @@ namespace NerdStore.WebApp.Mvc.Setup
 
 			services.AddScoped<INotificationHandler<PagamentoRealizadoEvent>, PagamentoRealizadoEventHandler>();
 			services.AddScoped<INotificationHandler<PagamentoRecusadoEvent>, PagamentoRecusadoEventHandler>();
-			services.AddScoped<INotificationHandler<PedidoAtualizadoEvent>, PedidoAtualizadoEventHandler>();
 			services.AddScoped<INotificationHandler<PedidoEstoqueRejeitadoEvent>, PedidoEstoqueRejeitadoEventHandler>();
 			services.AddScoped<INotificationHandler<PedidoItemAdicionadoEvent>, PedidoItemAdicionadoEventHandler>();
 			services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoRascunhoIniciadoEventHandler>();
