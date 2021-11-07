@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using NerdStore.Core.Communication.Interfaces;
+using NerdStore.Core.Data.Interfaces;
 using NerdStore.Core.Messages;
+using NerdStore.Core.Messages.Common.DomainEvents;
 using NerdStore.Core.Messages.Common.Notifications;
 
 namespace NerdStore.Core.Communication.Mediator
@@ -9,17 +11,27 @@ namespace NerdStore.Core.Communication.Mediator
 	public class MediatorHandler : IMediatorHandler
 	{
 		private readonly IMediator _mediator;
+		private readonly IEventSourcingRepository _eventSourcingRepository;
 
-		public MediatorHandler(IMediator mediator)
-			=> _mediator = mediator;
+		public MediatorHandler(IMediator mediator, IEventSourcingRepository eventSourcingRepository)
+		{
+			_mediator = mediator;
+			_eventSourcingRepository = eventSourcingRepository;
+		}
 
 		public async Task PublicarEvento<T>(T evento) where T : Event
-			=> await _mediator.Publish(evento);
+		{
+			await _mediator.Publish(evento);
+			await _eventSourcingRepository.SalvarEvento(evento);
+		}
 
 		public async Task<bool> EnviarComando<T>(T comando) where T : Command
 			=> await _mediator.Send(comando);
 
 		public async Task PublicarNotificacao<T>(T notificacao) where T : DomainNotification
 			=> await _mediator.Publish(notificacao);
+
+		public async Task PublicarEventoDominio<T>(T evento) where T : DomainEvent
+			=> await _mediator.Publish(evento);
 	}
 }

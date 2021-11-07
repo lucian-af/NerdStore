@@ -47,7 +47,7 @@ namespace NerdStore.Catalogo.Domain.DomainServices
 			// TODO: 10 pode ser parametrizavel em arquivo de configuração
 			if (produto.QuantidadeEstoque < 10)
 			{
-				await _mediatorHandler.PublicarEvento(new ProdutoAbaixoEstoqueEvent(produto.Id, produto.QuantidadeEstoque));
+				await _mediatorHandler.PublicarEventoDominio(new ProdutoAbaixoEstoqueEvent(produto.Id, produto.QuantidadeEstoque));
 			}
 
 			_repoProduto.Atualizar(produto);
