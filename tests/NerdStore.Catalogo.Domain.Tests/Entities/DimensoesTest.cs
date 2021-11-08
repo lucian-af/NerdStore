@@ -11,10 +11,11 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[InlineData(-1)]
 		public void Dimensoes_Validar_Altura_MenorOuIgualZero_DeveRetornarException(decimal altura)
 		{
-			// Assert && Act && Assert
+			// Arrange && Act
 			var act = Assert.Throws<DomainException>(() =>
 					new Dimensoes(altura, 1, 1));
 
+			// Assert
 			Assert.Equal("O atributo 'Altura' deve ser maior que zero.", act.Message);
 		}
 
@@ -23,7 +24,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[InlineData(-1)]
 		public void Dimensoes_Validar_Largura_MenorOuIgualZero_DeveRetornarException(decimal largura)
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = Assert.Throws<DomainException>(() =>
 					new Dimensoes(1, largura, 1));
 
@@ -35,7 +36,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[InlineData(-1)]
 		public void Dimensoes_Validar_Profundidade_MenorOuIgualZero_DeveRetornarException(decimal profundidade)
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = Assert.Throws<DomainException>(() =>
 					new Dimensoes(1, 1, profundidade)
 					);
@@ -46,7 +47,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[Fact]
 		public void Dimensoes_Validar_NaoDeveRetornarException()
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = new Dimensoes(1, 1, 1);
 
 			Assert.NotNull(act);

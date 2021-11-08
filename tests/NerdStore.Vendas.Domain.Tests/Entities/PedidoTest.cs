@@ -9,7 +9,7 @@ namespace NerdStore.Vendas.Domain.Tests.Entities
 		[Fact]
 		public void Pedido_Validar_CalcuarValorPedido_ValorTotal_Deve_Ser_Igual_Soma_Dos_Itens()
 		{
-			// Assert && Act && Assert
+			// Arrange
 			var pedido = Pedido.PedidoFactory.NovoPedidoRascunho(Guid.NewGuid());
 
 			pedido.AdicionarItem(new PedidoItem(
@@ -18,16 +18,17 @@ namespace NerdStore.Vendas.Domain.Tests.Entities
 				 3,
 				 33.33m));
 
-
+			// Act
 			pedido.CalcularValorPedido();
 
+			// Assert
 			Assert.Equal(99.99m, pedido.ValorTotal);
 		}
 
 		[Fact]
 		public void Pedido_Validar_AplicarVoucher_DataValidadeExpirada_DeveRetornarErros()
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var pedido = Pedido.PedidoFactory.NovoPedidoRascunho(Guid.NewGuid());
 
 			pedido.AdicionarItem(new PedidoItem(
@@ -56,7 +57,7 @@ namespace NerdStore.Vendas.Domain.Tests.Entities
 		[Fact]
 		public void Pedido_Validar_AplicarVoucher_DataValidadeDisponivel_DeveAplicarVoucher()
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var pedido = Pedido.PedidoFactory.NovoPedidoRascunho(Guid.NewGuid());
 
 			pedido.AdicionarItem(new PedidoItem(

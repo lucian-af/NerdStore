@@ -12,7 +12,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[InlineData(" ")]
 		public void Categoria_Validar_Nome_NuloVazioOuEspacoEmBranco_DeveRetornarException(string nome)
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = Assert.Throws<DomainException>(() =>
 				new Categoria(nome, 1));
 
@@ -24,7 +24,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[InlineData(-1)]
 		public void Categoria_Validar_Codigo_MenorOuigualZero_DeveRetornarException(int codigo)
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = Assert.Throws<DomainException>(() =>
 				new Categoria("TESTE", codigo));
 
@@ -34,7 +34,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[Fact]
 		public void Categoria_Validar_NaoDeveRetornarException()
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = new Categoria("TESTE", 100);
 
 			Assert.NotNull(act);

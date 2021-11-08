@@ -14,7 +14,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[InlineData(" ")]
 		public void Produto_Validar_Nome_NuloVazioOuEspacoEmBranco_DeveRetornarException(string nome)
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = Assert.Throws<DomainException>(() =>
 				new Produto(
 					nome,
@@ -36,7 +36,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[InlineData(" ")]
 		public void Produto_Validar_Descricao_NuloVazioOuEspacoEmBranco_DeveRetornarException(string descricao)
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = Assert.Throws<DomainException>(() =>
 				new Produto(
 					"TESTE PRODUTO",
@@ -57,7 +57,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[InlineData(-1)]
 		public void Produto_Validar_Valor_ZeroOuNegativo_DeveRetornarException(decimal valor)
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = Assert.Throws<DomainException>(() =>
 				new Produto(
 					"TESTE PRODUTO",
@@ -76,7 +76,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[Fact]
 		public void Produto_Validar_IdCategoria_Nulo_DeveRetornarException()
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = Assert.Throws<DomainException>(() =>
 				new Produto(
 					"TESTE PRODUTO",
@@ -98,7 +98,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[InlineData(" ")]
 		public void Produto_Validar_Imagem_NuloVazioOuEspacoEmBranco_DeveRetornarException(string imagem)
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = Assert.Throws<DomainException>(() =>
 				new Produto(
 					"TESTE PRODUTO",
@@ -117,7 +117,7 @@ namespace NerdStore.Catalogo.Domain.Tests.Entities
 		[Fact]
 		public void Produto_Validar_NaoDeveRetornarException()
 		{
-			// Assert && Act && Assert
+			// Arrange && Act && Assert
 			var act = new Produto(
 				"TESTE PRODUTO",
 				"TESTE",
