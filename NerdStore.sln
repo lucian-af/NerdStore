@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31727.386
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Solution Config", "0 - Solution Config", "{28201C25-2410-4E55-A102-8AE0BBBA6DEE}"
 	ProjectSection(SolutionItems) = preProject
@@ -55,6 +55,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{2B4B1754-9D3E-4A62-BD23-C57D6EBE5914}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventSourcing", "src\EventSourcing\EventSourcing.csproj", "{F6F17FC4-B595-46D6-A465-658EEB31898A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E7FEBC39-F45E-4224-9922-762B499FE7AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.WebApp.Mvc.IntegrationTests", "tests\NerdStore.WebApp.Mvc.IntegrationTests\NerdStore.WebApp.Mvc.IntegrationTests.csproj", "{78FB279B-7426-4641-9D35-5A48B735FBCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +122,10 @@ Global
 		{F6F17FC4-B595-46D6-A465-658EEB31898A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6F17FC4-B595-46D6-A465-658EEB31898A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6F17FC4-B595-46D6-A465-658EEB31898A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78FB279B-7426-4641-9D35-5A48B735FBCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78FB279B-7426-4641-9D35-5A48B735FBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78FB279B-7426-4641-9D35-5A48B735FBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78FB279B-7426-4641-9D35-5A48B735FBCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +151,7 @@ Global
 		{D27BB7DC-5A9D-4114-92DB-DC994A9C4372} = {4D76E866-E2CB-4084-94D6-EB57FF6D27E1}
 		{41708DD4-720B-43F7-BF31-1115980440A9} = {4D76E866-E2CB-4084-94D6-EB57FF6D27E1}
 		{F6F17FC4-B595-46D6-A465-658EEB31898A} = {2B4B1754-9D3E-4A62-BD23-C57D6EBE5914}
+		{78FB279B-7426-4641-9D35-5A48B735FBCE} = {E7FEBC39-F45E-4224-9922-762B499FE7AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1EEC97DF-2B40-4882-921D-F44D657668D1}
