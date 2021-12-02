@@ -48,8 +48,8 @@
 												</div>
 											</form>
 										</td>
-										<td class="col-sm-1 col-md-1 text-center"><strong>@item.ValorUnitario.ToString("C")</strong></td>
-										<td class="col-sm-1 col-md-1 text-center"><strong>@item.ValorTotal.ToString("C")</strong></td>
+										<td class="col-sm-1 col-md-1 text-center"><strong id="valorUnitario">@item.ValorUnitario.ToString("C")</strong></td>
+										<td class="col-sm-1 col-md-1 text-center"><strong id="valorTotalItem">@item.ValorTotal.ToString("C")</strong></td>
 
 										<td class="col-sm-1 col-md-1">
 											<form method="post" asp-controller="Carrinho" asp-action="RemoverItem">

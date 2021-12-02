@@ -16,13 +16,13 @@ namespace NerdStore.Core.Communication.Mediator
 		public MediatorHandler(IMediator mediator, IEventSourcingRepository eventSourcingRepository)
 		{
 			_mediator = mediator;
-			_eventSourcingRepository = eventSourcingRepository;
+			//_eventSourcingRepository = eventSourcingRepository;
 		}
 
 		public async Task PublicarEvento<T>(T evento) where T : Event
 		{
 			await _mediator.Publish(evento);
-			await _eventSourcingRepository.SalvarEvento(evento);
+			//await _eventSourcingRepository.SalvarEvento(evento);
 		}
 
 		public async Task<bool> EnviarComando<T>(T comando) where T : Command

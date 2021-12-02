@@ -8,7 +8,7 @@ namespace NerdStore.WebApp.Mvc.IntegrationTests.Configs
 		protected override void ConfigureWebHost(IWebHostBuilder builder)
 		{
 			builder.UseStartup<TStartup>();
-			builder.UseEnvironment("testing");
+			builder.UseEnvironment("Tests");
 		}
 	}
 }

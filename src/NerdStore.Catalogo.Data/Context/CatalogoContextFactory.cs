@@ -13,6 +13,7 @@ namespace NerdStore.Catalogo.Data.Context
 			IConfiguration config = new ConfigurationBuilder()
 							.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../NerdStore.WebApp.Mvc"))
 							.AddJsonFile("appsettings.json")
+							.AddJsonFile($"appsettings.Tests.json", true, true)
 							.Build();
 
 			var connectionString = config.GetConnectionString("DefaultConnection");

@@ -15,8 +15,16 @@ namespace NerdStore.WebApp.Mvc
 {
 	public class StartupTests
 	{
-		public StartupTests(IConfiguration configuration)
-			=> Configuration = configuration;
+		public StartupTests(IHostEnvironment hostEnvironment)
+		{
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(hostEnvironment.ContentRootPath)
+				.AddJsonFile("appsettings.json", true, true)
+				.AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", true, true)
+				.AddEnvironmentVariables();
+
+			Configuration = builder.Build();
+		}
 
 		public IConfiguration Configuration { get; }
 
@@ -44,15 +52,7 @@ namespace NerdStore.WebApp.Mvc
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Home/Error");
-				app.UseHsts();
-			}
+			app.UseDeveloperExceptionPage();
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
