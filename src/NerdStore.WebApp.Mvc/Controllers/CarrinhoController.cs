@@ -9,7 +9,7 @@ using NerdStore.Vendas.Application.Commands.Models;
 using NerdStore.Vendas.Application.Queries.Dtos;
 using NerdStore.Vendas.Application.Queries.Dtos.Interfaces;
 
-namespace NerdStore.WebApp.MVC.Controllers
+namespace NerdStore.WebApp.Mvc.Controllers
 {
 	public class CarrinhoController : ControllerBase
 	{

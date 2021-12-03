@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using NerdStore.Core.Communication.Interfaces;
 using NerdStore.Core.Messages.Common.Notifications;
 
-namespace NerdStore.WebApp.Mvc.Controllers
+namespace NerdStore.WebApi.Controllers
 {
 	public abstract class ControllerBase : Controller
 	{
@@ -30,5 +30,23 @@ namespace NerdStore.WebApp.Mvc.Controllers
 
 		protected void NotificarErro(string codigo, string mensagem)
 			=> _mediatorHandler.PublicarNotificacao(new DomainNotification(codigo, mensagem));
+
+		protected new IActionResult Response(object result = null)
+		{
+			if (OperacaoValida())
+			{
+				return Ok(new
+				{
+					success = true,
+					data = result
+				});
+			}
+
+			return BadRequest(new
+			{
+				success = false,
+				errors = _notifications.ObterNotificacoes().Select(n => n.Value)
+			});
+		}
 	}
 }

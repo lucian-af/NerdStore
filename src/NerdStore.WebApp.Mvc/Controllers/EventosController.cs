@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NerdStore.Core.Data.Interfaces;
 
-namespace NerdStore.WebApp.MVC.Controllers
+namespace NerdStore.WebApp.Mvc.Controllers
 {
 	public class EventosController : Controller
 	{

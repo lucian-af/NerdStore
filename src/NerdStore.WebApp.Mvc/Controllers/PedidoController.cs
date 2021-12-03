@@ -5,7 +5,7 @@ using NerdStore.Core.Communication.Interfaces;
 using NerdStore.Core.Messages.Common.Notifications;
 using NerdStore.Vendas.Application.Queries.Dtos.Interfaces;
 
-namespace NerdStore.WebApp.MVC.Controllers
+namespace NerdStore.WebApp.Mvc.Controllers
 {
 	public class PedidoController : ControllerBase
 	{

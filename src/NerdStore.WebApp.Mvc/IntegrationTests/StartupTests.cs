@@ -11,7 +11,7 @@ using NerdStore.Pagamentos.Data;
 using NerdStore.Vendas.Data.Context;
 using NerdStore.WebApp.Mvc.Setup;
 
-namespace NerdStore.WebApp.Mvc
+namespace NerdStore.WebApp.Mvc.IntegrationTests
 {
 	public class StartupTests
 	{
