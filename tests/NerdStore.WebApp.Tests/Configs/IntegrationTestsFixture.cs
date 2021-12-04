@@ -2,9 +2,10 @@
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using NerdStore.WebApp.Mvc.IntegrationTests;
 using Xunit;
 
-namespace NerdStore.WebApp.Mvc.IntegrationTests.Configs
+namespace NerdStore.WebApp.Tests.Configs
 {
 	[CollectionDefinition(nameof(IntegrationTestsFixtureCollection))]
 	public class IntegrationTestsFixtureCollection : ICollectionFixture<IntegrationTestsFixture<StartupTests>> { }

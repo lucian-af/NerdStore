@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using AngleSharp.Html.Parser;
-using NerdStore.WebApp.Mvc.IntegrationTests.Configs;
+using NerdStore.WebApp.Mvc.IntegrationTests;
+using NerdStore.WebApp.Tests.Configs;
 using Xunit;
 
-namespace NerdStore.WebApp.Mvc.IntegrationTests
+namespace NerdStore.WebApp.Tests
 {
 	[Collection(nameof(IntegrationTestsFixtureCollection))]
 	public class PedidoTest
@@ -50,9 +50,9 @@ namespace NerdStore.WebApp.Mvc.IntegrationTests
 				.Result
 				.All;
 
-			var formQuantidade = html?.FirstOrDefault(c => c.Id == "quantidade")?.GetAttribute("value")?.ApenasNumeros();
-			var valorUnitario = html?.FirstOrDefault(c => c.Id == "valorUnitario")?.TextContent.Split('.')[0]?.ApenasNumeros();
-			var valorTotal = html?.FirstOrDefault(c => c.Id == "valorTotalItem")?.TextContent.Split('.')[0]?.ApenasNumeros();
+			var formQuantidade = html?.FirstOrDefault(c => c.Id == "quantidade")?.GetAttribute("value")?.NumberOnly();
+			var valorUnitario = html?.FirstOrDefault(c => c.Id == "valorUnitario")?.TextContent.Split('.')[0]?.NumberOnly();
+			var valorTotal = html?.FirstOrDefault(c => c.Id == "valorTotalItem")?.TextContent.Split('.')[0]?.NumberOnly();
 
 			Assert.Equal(valorTotal, formQuantidade * valorUnitario);
 		}

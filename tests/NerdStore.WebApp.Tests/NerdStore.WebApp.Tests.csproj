@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AngleSharp" Version="0.16.1" />
+    <PackageReference Include="Bogus" Version="34.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.12" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -22,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\NerdStore.WebApi\NerdStore.WebApi.csproj" />
     <ProjectReference Include="..\..\src\NerdStore.WebApp.Mvc\NerdStore.WebApp.Mvc.csproj" />
   </ItemGroup>
 

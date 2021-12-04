@@ -33,42 +33,19 @@ namespace NerdStore.WebApi.IntegrationTests
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddControllers();
+
+			services.LoadAppSettings(Configuration);
+
 			services.AddDbContext<CatalogoContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 			services.AddDbContext<VendasContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-			services.LoadAppSettings(Configuration);
-
-			// JWT
-
-			var key = Encoding.ASCII.GetBytes(AuthenticationSettings.Secret);
-
-			services.AddAuthentication(x =>
-			{
-				x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-				x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-			}).AddJwtBearer(x =>
-			{
-				x.RequireHttpsMetadata = true;
-				x.SaveToken = true;
-				x.TokenValidationParameters = new TokenValidationParameters
-				{
-					ValidateIssuerSigningKey = true,
-					IssuerSigningKey = new SymmetricSecurityKey(key),
-					ValidateIssuer = true,
-					ValidateAudience = true,
-					ValidAudience = AuthenticationSettings.ValidoEm,
-					ValidIssuer = AuthenticationSettings.Emissor
-				};
-			});
-
-			services.AddMvc();
-
 			services.AddAutoMapper(typeof(DomainToDtoMappingProfile), typeof(DtoToDomainMappingProfile));
 
-			services.AddMediatR(typeof(Startup));
+			services.AddMediatR(typeof(StartupApiTests));
 
 			services.RegisterServices();
 		}
@@ -78,9 +55,11 @@ namespace NerdStore.WebApi.IntegrationTests
 			app.UseDeveloperExceptionPage();
 
 			app.UseHttpsRedirection();
-			app.UseStaticFiles();
+
+			app.UseRouting();
 
 			app.UseAuthentication();
+			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{
